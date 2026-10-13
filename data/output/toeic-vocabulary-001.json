@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0",
+  "deck_id": "toeic-vocabulary-001",
+  "deck_name": "TOEIC Picture Cards",
+  "words": [
+    {
+      "word": "abstain",
+      "part_of_speech": "v.",
+      "phonetic_uk": "/əbˈsteɪn/",
+      "phonetic_us": "/əbˈsteɪn/",
+      "word_id": "abstain",
+      "meanings": [
+        {
+          "definition_zh": "戒除；避免（尤指酒、食物等）",
+          "phrase": "abstain from alcohol",
+          "phrase_zh": "戒酒",
+          "meaning_id": "abstain-01",
+          "examples": [
+            {
+              "sentence_id": "abstain-01-001",
+              "sentence_en": "The doctor advised him to abstain from alcohol during treatment.",
+              "sentence_zh": "医生建议他在治疗期间戒酒。",
+              "image": {
+                "model": "sdxl",
+                "checkpoint": "sd_xl_base_1.0.safetensors",
+                "width": 1024,
+                "height": 1024,
+                "steps": 30,
+                "cfg": 7.0,
+                "sampler": "euler",
+                "scheduler": "normal",
+                "seed": -1,
+                "path": "../../assets/images/abstain-01-001.png",
+                "prompt": "Realistic photo, clean composition, natural lighting, educational flashcard illustration. A medical consultation in a modern clinic. A doctor talks to a male patient, who pushes away a glass of alcohol with a clear refusal gesture. No text in image.",
+                "negative_prompt": "text, watermark, logo, blurry, low quality, distorted face, extra fingers, bad anatomy, duplicated objects, captions, subtitles, letters, signage",
+                "status": "pending",
+                "error_message": ""
+              }
+            }
+          ]
+        },
+        {
+          "definition_zh": "弃权；不投票",
+          "phrase": "abstain from voting",
+          "phrase_zh": "投票时弃权",
+          "meaning_id": "abstain-02",
+          "examples": [
+            {
+              "sentence_id": "abstain-02-001",
+              "sentence_en": "Three committee members chose to abstain from voting in the final ballot.",
+              "sentence_zh": "三名委员在最终表决中选择了弃权。",
+              "image": {
+                "model": "sdxl",
+                "checkpoint": "sd_xl_base_1.0.safetensors",
+                "width": 1024,
+                "height": 1024,
+                "steps": 30,
+                "cfg": 7.0,
+                "sampler": "euler",
+                "scheduler": "normal",
+                "seed": -1,
+                "path": "../../assets/images/abstain-02-001.png",
+                "prompt": "Realistic photo, clean composition, natural lighting, educational flashcard illustration. A formal committee meeting at a conference table. Three committee members keep their hands lowered while other members raise their hands to vote. Generic fictional setting with invented people, no resemblance to real political figures, no party symbols or recognizable national emblems. No text in image.",
+                "negative_prompt": "text, watermark, logo, blurry, low quality, distorted face, extra fingers, bad anatomy, duplicated objects, captions, subtitles, letters, signage",
+                "status": "pending",
+                "error_message": ""
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "word": "inaugural",
+      "part_of_speech": "adj.",
+      "phonetic_uk": "/ɪˈnɔːɡjərəl/",
+      "phonetic_us": "/ɪˈnɔːɡjərəl/",
+      "word_id": "inaugural",
+      "meanings": [
+        {
+          "definition_zh": "就职的；开幕的；首次的",
+          "phrase": "inaugural address",
+          "phrase_zh": "就职演说",
+          "meaning_id": "inaugural-01",
+          "examples": [
+            {
+              "sentence_id": "inaugural-01-001",
+              "sentence_en": "The new president outlined an economic reform plan in his inaugural address.",
+              "sentence_zh": "新总统在就职演说中提出了经济改革计划。",
+              "image": {
+                "model": "sdxl",
+                "checkpoint": "sd_xl_base_1.0.safetensors",
+                "width": 1024,
+                "height": 1024,
+                "steps": 30,
+                "cfg": 7.0,
+                "sampler": "euler",
+                "scheduler": "normal",
+                "seed": -1,
+                "path": "../../assets/images/inaugural-01-001.png",
+                "prompt": "Realistic photo, clean composition, natural lighting, educational flashcard illustration. An official inauguration ceremony. A newly elected president delivers a formal speech at a podium before an attentive audience. Generic fictional setting with invented people, no resemblance to real political figures, no party symbols or recognizable national emblems. No text in image.",
+                "negative_prompt": "text, watermark, logo, blurry, low quality, distorted face, extra fingers, bad anatomy, duplicated objects, captions, subtitles, letters, signage",
+                "status": "pending",
+                "error_message": ""
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

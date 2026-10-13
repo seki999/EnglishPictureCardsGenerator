@@ -1,0 +1,25 @@
+# 所有相对文件路径以项目根目录为基准。
+deck_id: toeic-vocabulary-001
+deck_name: TOEIC Picture Cards
+input: data/input/sample_vocab.md
+output: data/output/toeic-vocabulary-001.json
+image_dir: assets/images
+workflow: workflows/sdxl_basic_api.json
+comfyui:
+  url: http://127.0.0.1:8188
+  request_timeout: 30
+  task_timeout: 600
+  poll_interval: 2
+  retries: 2
+generation:
+  model: sdxl
+  checkpoint: sd_xl_base_1.0.safetensors
+  width: 1024
+  height: 1024
+  steps: 30
+  cfg: 7.0
+  sampler: euler
+  scheduler: normal
+  seed: -1
+# 可按短语提供英文可视场景，覆盖规则生成的场景。
+prompt_overrides: {}
