@@ -20,6 +20,23 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_comfyui.ps1
 
 ## 最短运行步骤
 
+### 手动使用 ComfyUI 浏览器界面
+
+1. 双击项目根目录 `open_comfyui.bat`，它会启动 CPU 服务并打开 `http://127.0.0.1:8188`，不自动生成图片。
+2. 将 `workflows/sdxl_lightning_manual_ui.json` 拖入浏览器工作区。它是根据 [ByteDance 官方 LoRA 界面工作流](https://huggingface.co/ByteDance/SDXL-Lightning/blob/main/comfyui/sdxl_lightning_workflow_lora.json) 配置的原生画布 JSON，包含已安装的模型名称和参数；`*_api.json` 则用于 Python API，不要把占位符模板作为手动工作流。
+3. 在 `Positive prompt - edit here` 节点里填写英文场景描述，建议以 `A realistic photo ...` 开头、以 `No text in image.` 结束。
+4. 保留当前 4-step LoRA 的参数：1024×1024、batch_size=1、steps=4、CFG=1、sampler=euler、scheduler=sgm_uniform、denoise=1、LoRA strength=1。seed 的 randomize 表示之后自动换种子；fixed 可以重复同一配置。
+5. 点击 Run / Queue 或按 Ctrl+Enter 生成。输出由 SaveImage 节点保存到 `.runtime/ComfyUI/output/manual/`，不会自动加入词汇 JSON，也不会自动复制到 `assets/images/`。按 Ctrl+S 可保存修改过的界面工作流。
+
+当前 CFG=1 不使用负向引导，负向提示词即使填写也不会改变结果。普通 SDXL Base 的 30 步 / CFG 7 参数属于另一种工作流，不要直接套用在这个 4-step LoRA 上。CPU 实测一张约 2–3 分钟，重新加载模型可能更慢。关闭浏览器不会停止后台服务。
+
+已下载的权重相对于项目根目录的位置：
+
+```text
+.runtime/ComfyUI/models/checkpoints/sd_xl_base_1.0.safetensors
+.runtime/ComfyUI/models/loras/sdxl_lightning_4step_lora.safetensors
+```
+
 在项目目录打开 PowerShell：
 
 ```powershell
