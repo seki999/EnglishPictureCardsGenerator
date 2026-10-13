@@ -21,20 +21,25 @@
               "sentence_en": "The doctor advised him to abstain from alcohol during treatment.",
               "sentence_zh": "医生建议他在治疗期间戒酒。",
               "image": {
-                "model": "sdxl",
+                "model": "sdxl-lightning-4step",
                 "checkpoint": "sd_xl_base_1.0.safetensors",
+                "lora": "sdxl_lightning_4step_lora.safetensors",
+                "lora_strength_model": 1.0,
+                "lora_strength_clip": 1.0,
                 "width": 1024,
                 "height": 1024,
-                "steps": 30,
-                "cfg": 7.0,
+                "steps": 4,
+                "cfg": 1.0,
                 "sampler": "euler",
-                "scheduler": "normal",
-                "seed": -1,
+                "scheduler": "sgm_uniform",
+                "seed": 5030149629778371045,
                 "path": "../../assets/images/abstain-01-001.png",
-                "prompt": "Realistic photo, clean composition, natural lighting, educational flashcard illustration. A medical consultation in a modern clinic. A doctor talks to a male patient, who pushes away a glass of alcohol with a clear refusal gesture. No text in image.",
-                "negative_prompt": "text, watermark, logo, blurry, low quality, distorted face, extra fingers, bad anatomy, duplicated objects, captions, subtitles, letters, signage",
-                "status": "pending",
-                "error_message": ""
+                "prompt": "(realistic DSLR photo:1.3), clean composition, natural lighting, realistic skin texture. (A doctor and a male patient sitting face to face:1.4) in a clinic. Two people, doctor in a white coat on the left, patient in a blue shirt on the right refusing a small wineglass with an open palm gesture. Waist-up view of both people. No text in image.",
+                "negative_prompt": "text, watermark, logo, blurry, low quality, distorted face, extra fingers, bad anatomy, duplicated objects, (illustration:1.5), (cartoon:1.5), (vector art:1.5), drawing, painting, abstract shapes, product photography, still life, captions, subtitles, letters, signage",
+                "workflow": "workflows/sdxl_lightning_api.json",
+                "status": "completed",
+                "error_message": "",
+                "prompt_id": "fccb7cb8-d979-4715-b65f-f80c2d2b3f40"
               }
             }
           ]
@@ -50,20 +55,25 @@
               "sentence_en": "Three committee members chose to abstain from voting in the final ballot.",
               "sentence_zh": "三名委员在最终表决中选择了弃权。",
               "image": {
-                "model": "sdxl",
+                "model": "sdxl-lightning-4step",
                 "checkpoint": "sd_xl_base_1.0.safetensors",
+                "lora": "sdxl_lightning_4step_lora.safetensors",
+                "lora_strength_model": 1.0,
+                "lora_strength_clip": 1.0,
                 "width": 1024,
                 "height": 1024,
-                "steps": 30,
-                "cfg": 7.0,
+                "steps": 4,
+                "cfg": 1.0,
                 "sampler": "euler",
-                "scheduler": "normal",
-                "seed": -1,
+                "scheduler": "sgm_uniform",
+                "seed": 7564575133684226668,
                 "path": "../../assets/images/abstain-02-001.png",
-                "prompt": "Realistic photo, clean composition, natural lighting, educational flashcard illustration. A formal committee meeting at a conference table. Three committee members keep their hands lowered while other members raise their hands to vote. Generic fictional setting with invented people, no resemblance to real political figures, no party symbols or recognizable national emblems. No text in image.",
-                "negative_prompt": "text, watermark, logo, blurry, low quality, distorted face, extra fingers, bad anatomy, duplicated objects, captions, subtitles, letters, signage",
-                "status": "pending",
-                "error_message": ""
+                "prompt": "(realistic DSLR photo:1.3), clean composition, natural lighting, realistic skin texture. (Five adults sitting around a conference table:1.3). Three committee members keep their hands lowered, two other members raise one hand to vote. Plain meeting room, clearly visible faces and upper bodies, candid meeting photograph. Generic fictional setting with invented people, no resemblance to real political figures, no party symbols or recognizable national emblems. No text in image.",
+                "negative_prompt": "text, watermark, logo, blurry, low quality, distorted face, extra fingers, bad anatomy, duplicated objects, (illustration:1.5), (cartoon:1.5), (vector art:1.5), drawing, painting, abstract shapes, product photography, still life, captions, subtitles, letters, signage",
+                "workflow": "workflows/sdxl_lightning_api.json",
+                "status": "completed",
+                "error_message": "",
+                "prompt_id": "cab7f0d2-7811-41e5-9c60-56acfc2c1404"
               }
             }
           ]
@@ -88,20 +98,25 @@
               "sentence_en": "The new president outlined an economic reform plan in his inaugural address.",
               "sentence_zh": "新总统在就职演说中提出了经济改革计划。",
               "image": {
-                "model": "sdxl",
+                "model": "sdxl-lightning-4step",
                 "checkpoint": "sd_xl_base_1.0.safetensors",
+                "lora": "sdxl_lightning_4step_lora.safetensors",
+                "lora_strength_model": 1.0,
+                "lora_strength_clip": 1.0,
                 "width": 1024,
                 "height": 1024,
-                "steps": 30,
-                "cfg": 7.0,
+                "steps": 4,
+                "cfg": 1.0,
                 "sampler": "euler",
-                "scheduler": "normal",
-                "seed": -1,
+                "scheduler": "sgm_uniform",
+                "seed": 113845945594829550,
                 "path": "../../assets/images/inaugural-01-001.png",
-                "prompt": "Realistic photo, clean composition, natural lighting, educational flashcard illustration. An official inauguration ceremony. A newly elected president delivers a formal speech at a podium before an attentive audience. Generic fictional setting with invented people, no resemblance to real political figures, no party symbols or recognizable national emblems. No text in image.",
-                "negative_prompt": "text, watermark, logo, blurry, low quality, distorted face, extra fingers, bad anatomy, duplicated objects, captions, subtitles, letters, signage",
-                "status": "pending",
-                "error_message": ""
+                "prompt": "(realistic DSLR photo:1.3), clean composition, natural lighting, realistic skin texture. (A candid event photograph of a man speaking at a plain podium:1.5). An anonymous actor in a dark suit portrays a fictional newly elected president during an inaugural address. Realistic human face and skin, softly blurred seated audience, neutral indoor hall. Generic fictional setting with invented people, no resemblance to real political figures, no party symbols or recognizable national emblems. No text in image.",
+                "negative_prompt": "text, watermark, logo, blurry, low quality, distorted face, extra fingers, bad anatomy, duplicated objects, (illustration:1.5), (cartoon:1.5), (vector art:1.5), drawing, painting, abstract shapes, product photography, still life, captions, subtitles, letters, signage",
+                "workflow": "workflows/sdxl_lightning_api.json",
+                "status": "completed",
+                "error_message": "",
+                "prompt_id": "ff9eb6cf-a075-49b5-b495-1aaa1b550d6f"
               }
             }
           ]

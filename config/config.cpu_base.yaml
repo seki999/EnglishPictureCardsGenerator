@@ -1,0 +1,24 @@
+# 原始 SDXL CPU 参数备用；速度慢，低分辨率画面需人工检查。
+deck_id: toeic-vocabulary-001
+deck_name: TOEIC Picture Cards
+input: data/input/sample_vocab.md
+output: data/output/toeic-vocabulary-001.json
+image_dir: assets/images
+workflow: workflows/sdxl_basic_api.json
+comfyui:
+  url: http://127.0.0.1:8188
+  request_timeout: 30
+  task_timeout: 7200
+  poll_interval: 3
+  retries: 2
+generation:
+  model: sdxl
+  checkpoint: sd_xl_base_1.0.safetensors
+  width: 512
+  height: 512
+  steps: 20
+  cfg: 5.5
+  sampler: dpmpp_2m
+  scheduler: karras
+  seed: -1
+prompt_overrides: {}

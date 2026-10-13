@@ -37,7 +37,7 @@ def normalize(records: list[Record], config: dict, output: Path) -> dict:
         prompt, negative = build(record.sentence_en, record.phrase, config.get('prompt_overrides'))
         image = copy.deepcopy(config['generation'])
         image.update(path=Path(os.path.relpath(image_dir / (sentence_id + '.png'), output.parent)).as_posix(),
-                     prompt=prompt, negative_prompt=negative, status='pending', error_message='')
+                     prompt=prompt, negative_prompt=negative, workflow=config['workflow'], status='pending', error_message='')
         meaning['examples'].append(dict(sentence_id=sentence_id, sentence_en=record.sentence_en,
                                         sentence_zh=record.sentence_zh, image=image))
     return deck
@@ -50,7 +50,7 @@ def restore(deck: dict, old: dict) -> None:
         p = previous.get(e['sentence_id'])
         if p and all(e[k] == p[k] for k in ('sentence_en', 'sentence_zh')):
             # Changed prompts or parameters invalidate prior images. Random seeds persist.
-            keys = ('path', 'prompt', 'negative_prompt', 'width', 'height', 'model', 'sampler', 'steps', 'cfg', 'checkpoint', 'scheduler')
+            keys = ('path', 'prompt', 'negative_prompt', 'width', 'height', 'model', 'sampler', 'steps', 'cfg', 'checkpoint', 'scheduler', 'workflow', 'lora', 'lora_strength_model', 'lora_strength_clip')
             if all(e['image'].get(k) == p['image'].get(k) for k in keys):
                 if e['image']['seed'] in (-1, p['image'].get('seed')):
                     e['image'] = copy.deepcopy(p['image'])

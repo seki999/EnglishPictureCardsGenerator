@@ -2,6 +2,22 @@
 
 本地 Windows 10/11、Python 3.11+ 的 CLI 工具。读取 Markdown / CSV / Excel，生成分层词汇 JSON 和英文场景 prompt，可通过本地 ComfyUI + SDXL 为每条例句生成 PNG。没有 GUI、TTS 或音频功能。
 
+## 此电脑的本地配置
+
+此电脑检测到 Intel UHD 核显、约 32 GB 内存，未检测到 NVIDIA GPU。因此另提供 CPU 配置 `config/config.cpu.yaml`：SDXL Base 加 [ByteDance 官方 SDXL-Lightning 4-step LoRA](https://huggingface.co/ByteDance/SDXL-Lightning)，1024×1024、4 步、Euler / sgm_uniform、CFG 1、任务超时 2 小时。加速权重约 394 MB，放在 `.runtime/ComfyUI/models/loras/`，也校验官方 SHA-256。此加速模型的 CFG 1 不启用负向引导，negative_prompt 仍保存；无文字要求通过正向 prompt 与人工检查落实。普通 SDXL 配置仍为 1024×1024、30 步；原 CPU 512×512 / 20 步配置在 `config/config.cpu_base.yaml` 备用。
+
+ComfyUI v0.39.0 安装在项目的 `.runtime/ComfyUI/`，独立 Python 环境在 `.runtime/comfy-venv/`，官方 SDXL Base 模型在 `.runtime/ComfyUI/models/checkpoints/`。这些大型文件不会提交 Git。模型下载脚本支持八段并行续传，并校验官方 SHA-256。
+
+准备完成后，**双击 `run_local_cpu.bat` 即可自动启动本地 ComfyUI 并生成图片**。它保留后台 ComfyUI 以便后续使用，日志在 `logs/comfyui.stdout.log` / `logs/comfyui.stderr.log`，仅监听本机 8188 端口。可在任务管理器结束 `.runtime/comfy-venv` 的 Python 进程以停止服务，启动时的 PID 保存在 `.runtime/comfyui.pid`。
+
+换电脑后需要重新安装，可以运行：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_comfyui.ps1
+```
+
+此脚本需要 Git 与联网，安装 CPU PyTorch、ComfyUI、官方约 6.94 GB 的 SDXL checkpoint 和约 394 MB 的加速 LoRA。CPU 生成速度仍较慢；若以后安装 NVIDIA GPU，应按官方说明换用 CUDA PyTorch 并去掉启动参数 `--cpu`。
+
 ## 最短运行步骤
 
 在项目目录打开 PowerShell：
@@ -82,7 +98,7 @@ phrase, phrase_zh, sentence_zh, sentence_en
 
 ## Prompt 规则
 
-所有 prompt 使用 realistic photo、clean composition、natural lighting、educational flashcard illustration，末尾为 `No text in image.`；negative prompt 排除 text、watermark、logo、captions、subtitles、letters、signage 等。程序不向图片添加文字或中文释义。总统、就职、投票等场景使用虚构人物与通用环境，不提示真实政治人物身份。
+所有 prompt 使用 realistic DSLR photo、clean composition、natural lighting、realistic skin texture，作为英语学习卡片的场景照片，末尾为 `No text in image.`；negative prompt 排除 text、watermark、logo、captions、subtitles、letters、signage 等，并排除插画与矢量画。实测将 illustration 放入正向 prompt 会使 SDXL 偏向插画，因此不使用这个风格词。程序不向图片添加文字或中文释义。总统、就职、投票等场景使用虚构人物与通用环境，不提示真实政治人物身份。
 
 第一版完全离线：医疗戒酒、弃权、就职演说、投票、道歉、同意等有专门可视化规则，其他句子提取动作片段保守回退。它不是通用语言模型，复杂抽象句子的 prompt 需要人工校对。可在 YAML 按短语覆盖场景：
 

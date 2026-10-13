@@ -1,7 +1,7 @@
 """Offline visual rules. Custom phrase mappings take precedence over built-in rules."""
 import re
-NEGATIVE = 'text, watermark, logo, blurry, low quality, distorted face, extra fingers, bad anatomy, duplicated objects'
-STYLE = 'Realistic photo, clean composition, natural lighting, educational flashcard illustration. '
+NEGATIVE = 'text, watermark, logo, blurry, low quality, distorted face, extra fingers, bad anatomy, duplicated objects, (illustration:1.5), (cartoon:1.5), (vector art:1.5), drawing, painting, abstract shapes, product photography, still life'
+STYLE = '(realistic DSLR photo:1.3), clean composition, natural lighting, realistic skin texture. '
 
 
 def build(sentence: str, phrase: str, overrides: dict[str, str] | None = None) -> tuple[str, str]:
@@ -10,11 +10,11 @@ def build(sentence: str, phrase: str, overrides: dict[str, str] | None = None) -
     if custom:
         scene = custom
     elif 'abstain' in text and 'alcohol' in text:
-        scene = 'A medical consultation in a modern clinic. A doctor talks to a male patient, who pushes away a glass of alcohol with a clear refusal gesture.'
+        scene = '(A doctor and a male patient sitting face to face:1.4) in a clinic. Two people, doctor in a white coat on the left, patient in a blue shirt on the right refusing a small wineglass with an open palm gesture. Waist-up view of both people.'
     elif 'abstain' in text and ('vot' in text or 'ballot' in text):
-        scene = 'A formal committee meeting at a conference table. Three committee members keep their hands lowered while other members raise their hands to vote.'
+        scene = '(Five adults sitting around a conference table:1.3). Three committee members keep their hands lowered, two other members raise one hand to vote. Plain meeting room, clearly visible faces and upper bodies, candid meeting photograph.'
     elif 'inaugural' in text and ('address' in text or 'speech' in text):
-        scene = 'An official inauguration ceremony. A newly elected president delivers a formal speech at a podium before an attentive audience.'
+        scene = '(A candid event photograph of a man speaking at a plain podium:1.5). An anonymous actor in a dark suit portrays a fictional newly elected president during an inaugural address. Realistic human face and skin, softly blurred seated audience, neutral indoor hall.'
     elif 'vot' in text or 'ballot' in text or 'election' in text:
         scene = 'A fictional civic voting scene. Anonymous people place blank folded ballots into a plain ballot box in a neutral meeting room.'
     elif any(term in text for term in ('president', 'inaugur', 'politic', 'minister')):

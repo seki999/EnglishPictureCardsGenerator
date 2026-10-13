@@ -1,0 +1,27 @@
+# 本机仅检测到 Intel UHD 核显，使用 CPU 测试配置。
+deck_id: toeic-vocabulary-001
+deck_name: TOEIC Picture Cards
+input: data/input/sample_vocab.md
+output: data/output/toeic-vocabulary-001.json
+image_dir: assets/images
+workflow: workflows/sdxl_lightning_api.json
+comfyui:
+  url: http://127.0.0.1:8188
+  request_timeout: 30
+  task_timeout: 7200
+  poll_interval: 3
+  retries: 2
+generation:
+  model: sdxl-lightning-4step
+  checkpoint: sd_xl_base_1.0.safetensors
+  lora: sdxl_lightning_4step_lora.safetensors
+  lora_strength_model: 1.0
+  lora_strength_clip: 1.0
+  width: 1024
+  height: 1024
+  steps: 4
+  cfg: 1.0
+  sampler: euler
+  scheduler: sgm_uniform
+  seed: -1
+prompt_overrides: {}

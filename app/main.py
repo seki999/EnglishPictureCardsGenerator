@@ -60,7 +60,7 @@ def main() -> int:
             if eligible and args.limit != 0:
                 client = ComfyUIClient(config['comfyui'], resolve(config['workflow']))
                 try:
-                    client.check(config['generation']['checkpoint'])
+                    client.check(config['generation']['checkpoint'], config['generation'].get('lora'))
                 except Exception as error:
                     for e in eligible[:args.limit] if args.limit is not None else eligible:
                         e['image'].update(status='failed', error_message=str(error))
@@ -69,7 +69,8 @@ def main() -> int:
                     write(output, deck)
                     raise
                 if args.force and config['generation']['seed'] == -1:
-                    for e in eligible:
+                    selected = eligible[:args.limit] if args.limit is not None else eligible
+                    for e in selected:
                         e['image']['seed'] = -1
                 stats = generate(deck, output, client, args.limit, args.force)
                 stats['total'] = len(records)

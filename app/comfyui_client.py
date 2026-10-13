@@ -33,7 +33,7 @@ class ComfyUIClient:
                 time.sleep(min(2 ** attempt, 5))
         raise RuntimeError('无法访问 ComfyUI。')
 
-    def check(self, checkpoint: str) -> None:
+    def check(self, checkpoint: str, lora: str | None = None) -> None:
         try:
             info = self.request('GET', '/object_info/CheckpointLoaderSimple').json()
         except requests.RequestException as error:
@@ -41,6 +41,11 @@ class ComfyUIClient:
         names = info['CheckpointLoaderSimple']['input']['required']['ckpt_name'][0]
         if checkpoint not in names:
             raise ValueError(f'找不到 checkpoint {checkpoint!r}。ComfyUI 可用模型：{names}')
+        if lora:
+            info = self.request('GET', '/object_info/LoraLoader').json()
+            names = info['LoraLoader']['input']['required']['lora_name'][0]
+            if lora not in names:
+                raise ValueError(f'找不到 LoRA {lora!r}。请运行 setup_comfyui.ps1 或将权重放入 ComfyUI/models/loras。')
 
     def workflow(self, image: dict, sentence_id: str) -> dict:
         workflow = copy.deepcopy(self.template)

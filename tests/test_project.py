@@ -113,6 +113,26 @@ class ProjectTests(unittest.TestCase):
         self.assertNotIn('Biden', prompt)
         self.assertIn('fictional', prompt)
 
+    def test_lightning_workflow_injection_and_resume_invalidation(self):
+        config = load(ROOT / 'config/config.cpu.yaml')
+        config['image_dir'] = self.config['image_dir']
+        deck = normalize(self.records, config, self.output)
+        e = next(examples(deck))
+        e['image']['seed'] = 42
+        client = ComfyUIClient(config['comfyui'], ROOT / config['workflow'])
+        self.addCleanup(client.close)
+        workflow = client.workflow(e['image'], e['sentence_id'])
+        self.assertEqual(workflow['10']['inputs']['lora_name'], config['generation']['lora'])
+        self.assertEqual(workflow['3']['inputs']['model'], ['10', 0])
+        self.assertEqual(workflow['6']['inputs']['target_width'], 1024)
+        self.assertEqual(workflow['3']['inputs']['cfg'], 1.0)
+        self.assertEqual(workflow['3']['inputs']['steps'], 4)
+        e['image']['status'] = 'completed'
+        changed = normalize(self.records, config, self.output)
+        next(examples(changed))['image']['lora'] = 'different.safetensors'
+        restore(changed, deck)
+        self.assertEqual(next(examples(changed))['image']['status'], 'pending')
+
     def test_atomic_write_preserves_prior_json_on_failure(self):
         write(self.output, self.deck())
         original = self.output.read_bytes()
@@ -254,8 +274,9 @@ class ProjectTests(unittest.TestCase):
         import yaml
         client, state = self.fake_client()
         deck = self.deck()
-        generate(deck, self.output, client, limit=1)
+        generate(deck, self.output, client)
         before = next(examples(deck))['image']['seed']
+        untouched_seeds = [e['image']['seed'] for e in list(examples(deck))[1:]]
         self.config['comfyui'] = client.config
         self.config['output'] = str(self.output)
         path = self.root / 'config.yaml'
@@ -264,7 +285,8 @@ class ProjectTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         saved = json.loads(self.output.read_text(encoding='utf-8'))
         self.assertNotEqual(before, next(examples(saved))['image']['seed'])
-        self.assertEqual(len(state['submitted']), 2)
+        self.assertEqual(len(state['submitted']), 4)
+        self.assertEqual([e['image']['seed'] for e in list(examples(saved))[1:]], untouched_seeds)
 
 
 if __name__ == '__main__':
